@@ -25,5 +25,18 @@ namespace SmEticaret.Data
         public DbSet<RoleEntity> Roles { get; set; }
         public DbSet<UserEntity> Users { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            var roles = new RoleEntity[]
+            {
+                new RoleEntity {Id = 1, Name = "Seller"},
+                new RoleEntity {Id = 2, Name = "Buyer"}
+            };
+
+            modelBuilder.Entity<RoleEntity>().HasData(roles);
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }
