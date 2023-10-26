@@ -1,7 +1,13 @@
-﻿namespace SmEticaret.Data
+﻿using System.CodeDom.Compiler;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SmEticaret.Data
 {
-    public class EntityBase
+    public abstract class EntityBase
     {
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
 
     }
 }
