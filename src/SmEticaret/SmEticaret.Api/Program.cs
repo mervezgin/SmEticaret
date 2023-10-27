@@ -1,9 +1,12 @@
 
+using Microsoft.EntityFrameworkCore;
+using SmEticaret.Data;
+
 namespace SmEticaret.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,10 @@ namespace SmEticaret.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,6 +36,11 @@ namespace SmEticaret.Api
 
 
             app.MapControllers();
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                await dbContext.Database.EnsureCreatedAsync();
+            }
 
             app.Run();
         }
