@@ -59,7 +59,7 @@ namespace SmEticaret.Api.Controllers
 
         private string GetJwt(UserEntity user)
         {
-            var claims = new List<Claim>
+            var claims = new List<Claim>  
             {
                 new Claim(JwtClaimTypes.Name, user.Name),
                 new Claim(JwtClaimTypes.FamilyName, user.LastName),
