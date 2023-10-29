@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmEticaret.Data\SmEticaret.Data.csproj" />
+    <ProjectReference Include="..\SmEticaret.Shared\SmEticaret.Shared.csproj" />
   </ItemGroup>
 
 </Project>
