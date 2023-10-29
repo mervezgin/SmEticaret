@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using SmEticaret.Api.Services.TokenService;
 using SmEticaret.Data;
 
 namespace SmEticaret.Api
@@ -21,6 +22,8 @@ namespace SmEticaret.Api
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
             });
+
+            builder.Services.AddScoped<ITokenService, TokenService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
