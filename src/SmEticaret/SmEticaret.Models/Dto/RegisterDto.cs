@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SmEticaret.Api.Models
+namespace SmEticaret.Models.Dto
 {
-    public class RegisterModel
+    public class RegisterDto
     {
         public int RoleId { get; set; }
 

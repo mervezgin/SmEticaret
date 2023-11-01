@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmEticaret.Models\SmEticaret.Models.csproj" />
+  </ItemGroup>
+
 </Project>
