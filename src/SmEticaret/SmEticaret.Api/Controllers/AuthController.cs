@@ -64,6 +64,36 @@ namespace SmEticaret.Api.Controllers
                 Token = tokenResult.Data
             });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _dbContext.Users.SingleOrDefaultAsync(x => x.Email == registerModel.Email);
+
+            if(user is not null)
+            {
+                return BadRequest("Bu mail adresi kullanılmaktadır");
+            }
+
+            var newUser = new UserEntity
+            {
+                Name = registerModel.Name,
+                LastName = registerModel.LastName,
+                Email = registerModel.Email,
+                PasswordHash = HashString(registerModel.Password),
+                RoleId = registerModel.RoleId
+            };
+
+            _dbContext.Users.Add(newUser);
+            await _dbContext.SaveChangesAsync();
+
+            return Ok();
+        }
         private string HashString(string input)
         {
             using var sha256 = SHA256.Create();
