@@ -35,6 +35,15 @@ namespace SmEticaret.Data
 
             modelBuilder.Entity<RoleEntity>().HasData(roles);
 
+            modelBuilder.ApplyConfiguration(new CartEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new CartItemEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new  ProductCommentEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new UserEntityConfiguration());
+
+
             base.OnModelCreating(modelBuilder);
         }
 

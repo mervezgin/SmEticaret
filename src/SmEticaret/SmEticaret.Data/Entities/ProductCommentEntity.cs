@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +20,29 @@ namespace SmEticaret.Data.Entities
         [Required, Range(1,5)]
         public byte StarCount { get; set; }
 
-        [Required]
         public DateTime CreatedAt { get; set; }
+
+        public ProductEntity Product { get; set; }
+        public UserEntity User { get; set; }
+
+
+    }
+
+    public class ProductCommentEntityConfiguration : IEntityTypeConfiguration<ProductCommentEntity>
+    {
+        public void Configure(EntityTypeBuilder<ProductCommentEntity> builder)
+        {
+            builder
+                .HasOne(pc => pc.Product)
+                .WithMany(p => p.ProductComments)
+                .HasForeignKey(pc => pc.ProductId)
+                .OnDelete(DeleteBehavior.ClientCascade);
+
+            builder
+                .HasOne(pc => pc.User)
+                .WithMany(u => u.ProductComments)
+                .HasForeignKey(pc => pc.UserId)
+                .OnDelete(DeleteBehavior.ClientCascade);
+        }
     }
 }
