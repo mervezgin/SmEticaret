@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmEticaret.Models.Dto;
 using SmEticaret.Mvc.Models;
+using System.Reflection.Metadata.Ecma335;
 
 namespace SmEticaret.Mvc.Controllers
 {
@@ -31,6 +32,12 @@ namespace SmEticaret.Mvc.Controllers
 
         [HttpPost]
         public IActionResult Register([FromForm] RegisterViewModel registerDto )
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Logout()
         {
             return View();
         }
